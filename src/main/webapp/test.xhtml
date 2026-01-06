@@ -12,28 +12,25 @@
     </h:head>
     <h:body>
 
-        <h1>Tests d'accessibilité sur le textEditor</h1>
         <div class="card">
-            <h:form>
-                <h5 class="mt-0">Basic</h5>
-                <p:textEditor widgetVar="editor1" value="#{editorView.text}" height="300px"  />
-
-                <h3 class="first">Custom Toolbar</h3>
-                <p:textEditor widgetVar="editor2" value="#{editorView.text2}" height="300px" placeholder="Enter your content" required="true">
-                    <f:facet name="toolbar">
-             <span class="ql-formats">
-                <button class="ql-bold"  aria-label="bold"></button>
-                <button class="ql-italic"></button>
-                <button class="ql-underline"></button>
-                <button class="ql-strike"></button>
-            </span>
-                        <span class="ql-formats">
-                <select class="ql-font" aria-label="ql-font"></select>
-                <select class="ql-size"></select>
-            </span>
-                    </f:facet>
-                </p:textEditor>
-                <p:commandButton value="Save" update="@form" icon="pi pi-check" styleClass="mt-2"/>
+            <h:form id="form">
+                <p:treeTable value="#{ttPaginatorView.root}"
+                             var="document"
+                             paginator="true"
+                             rows="10"
+                             selectionMode="single"
+                             selection="#{ttPaginatorView.selectedNode}"
+                             rowKey="#{node.rowKey}">
+                    <p:column headerText="Name">
+                        <h:outputText value="#{document.name}"/>
+                    </p:column>
+                    <p:column headerText="Size">
+                        <h:outputText value="#{document.size} KB"/>
+                    </p:column>
+                    <p:column headerText="Type">
+                        <h:outputText value="#{document.type}"/>
+                    </p:column>
+                </p:treeTable>
             </h:form>
         </div>
 
